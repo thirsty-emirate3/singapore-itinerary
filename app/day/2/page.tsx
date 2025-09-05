@@ -135,16 +135,36 @@ export default function Day2Page() {
               </div>
                                     </section>
                         
-            {/* 次の日へ */}
-            <section className="text-center">
-              <Link
-                href={`/day/${nextDayId}`}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-2xl hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                次の日へ
-                <ArrowRightIcon className="w-5 h-5" />
-              </Link>
-                        </section>
+            {/* Navigation */}
+            <section className="text-center space-y-6">
+              {/* Previous Day */}
+              <div>
+                <Link
+                  href="/day/1"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-slate-600 text-white rounded-full hover:bg-slate-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-lg"
+                >
+                  <ArrowRightIcon className="w-5 h-5 rotate-180" />
+                  <span>前の日へ</span>
+                </Link>
+                <p className="text-slate-600 mt-3 font-inter">
+                  Day 1 — マリーナベイ・サンズ
+                </p>
+              </div>
+
+              {/* Next Day */}
+              <div>
+                <Link
+                  href={`/day/${nextDayId}`}
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-lg"
+                >
+                  <span>次の日へ</span>
+                  <ArrowRightIcon className="w-5 h-5" />
+                </Link>
+                <p className="text-slate-600 mt-3 font-inter">
+                  Day 3 — ユニバーサル・スタジオ
+                </p>
+              </div>
+            </section>
                       </div>
                     )}
 
@@ -310,15 +330,35 @@ export default function Day2Page() {
           </div>
         </section>
 
-        {/* 次の日へ */}
-        <section className="text-center mt-16">
-          <Link
-            href={`/day/${nextDayId}`}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-2xl hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            次の日へ
-            <ArrowRightIcon className="w-5 h-5" />
-          </Link>
+        {/* Navigation */}
+        <section className="text-center mt-16 space-y-6">
+          {/* Previous Day */}
+          <div>
+            <Link
+              href="/day/1"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-slate-600 text-white rounded-full hover:bg-slate-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-lg"
+            >
+              <ArrowRightIcon className="w-5 h-5 rotate-180" />
+              <span>前の日へ</span>
+            </Link>
+            <p className="text-slate-600 mt-3 font-inter">
+              Day 1 — マリーナベイ・サンズ
+            </p>
+          </div>
+
+          {/* Next Day */}
+          <div>
+            <Link
+              href={`/day/${nextDayId}`}
+              className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-lg"
+            >
+              <span>次の日へ</span>
+              <ArrowRightIcon className="w-5 h-5" />
+            </Link>
+            <p className="text-slate-600 mt-3 font-inter">
+              Day 3 — ユニバーサル・スタジオ
+            </p>
+          </div>
         </section>
           </div>
         )}

@@ -53,12 +53,6 @@ export interface Casino {
 
 export const day1Photos: Photo[] = [
   {
-    src: '/image/day1_detail/day1-hero.jpg',
-    alt: 'マリーナベイ・サンズの夜景',
-    caption: 'シンガポールの象徴的な夜景',
-    tag: 'hero'
-  },
-  {
     src: '/image/day1_detail/day1-lobby.jpg',
     alt: 'マリーナベイ・サンズのロビー',
     caption: '豪華なホテルロビー',
@@ -111,6 +105,12 @@ export const day1Photos: Photo[] = [
     alt: '夜のマーライオン',
     caption: 'シンガポールのシンボル',
     tag: 'merlion'
+  },
+  {
+    src: '/image/day1_detail/day1-hero.jpg',
+    alt: 'マリーナベイ・サンズの夜景',
+    caption: 'シンガポールの象徴的な夜景',
+    tag: 'hero'
   }
 ];
 

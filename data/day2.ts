@@ -243,7 +243,7 @@ export const day2Data: Day2Data = {
         "小籠包",
         "杏仁豆腐"
       ],
-      mapUrl: "https://maps.google.com/?q=Maxwell+Food+Centre+Singapore",
+      mapUrl: "https://maps.google.com/?q=Chinatown+Singapore",
       tips: [
         "朝9時前は空いている",
         "仏牙寺は服装に注意",
@@ -282,7 +282,7 @@ export const day2Data: Day2Data = {
         "ラッシー",
         "サモサ"
       ],
-      mapUrl: "https://maps.google.com/?q=Maxwell+Food+Centre+Singapore",
+      mapUrl: "https://maps.google.com/?q=Little+India+Singapore",
       tips: [
         "寺院は靴を脱ぐ",
         "香辛料は小分けで購入",
@@ -293,7 +293,7 @@ export const day2Data: Day2Data = {
           name: "Sri Veeramakaliamman Temple",
           icon: "🕉️",
           description: "ヒンドゥー寺院",
-          url: "https://maps.google.com/?q=Maxwell+Food+Centre+Singapore"
+          url: "https://maps.google.com/?q=Sri+Veeramakaliamman+Temple+Singapore"
         }
       ],
       budget: "$",
@@ -315,7 +315,7 @@ export const day2Data: Day2Data = {
         "ピタパン",
         "アラビックコーヒー"
       ],
-      mapUrl: "https://maps.google.com/?q=Maxwell+Food+Centre+Singapore",
+      mapUrl: "https://maps.google.com/?q=Arab+Street+Singapore",
       tips: [
         "モスクは礼拝時間外",
         "金曜は休みの店が多い",
@@ -326,13 +326,13 @@ export const day2Data: Day2Data = {
           name: "Haji Lane",
           icon: "🧱",
           description: "Street Art",
-          url: "https://maps.google.com/?q=Maxwell+Food+Centre+Singapore"
+          url: "https://maps.google.com/?q=Haji+Lane+Singapore"
         },
         {
           name: "Sultan Mosque",
           icon: "🕌",
           description: "モスク",
-          url: "https://maps.google.com/?q=Maxwell+Food+Centre+Singapore"
+          url: "https://maps.google.com/?q=Sultan+Mosque+Singapore"
         }
       ],
       budget: "$",
@@ -354,7 +354,7 @@ export const day2Data: Day2Data = {
         "屋台料理",
         "デザート"
       ],
-      mapUrl: "https://maps.google.com/?q=Maxwell+Food+Centre+Singapore",
+      mapUrl: "https://maps.google.com/?q=Bugis+Street+Singapore",
       tips: [
         "午前中は空いている",
         "交渉の余地あり",
@@ -365,13 +365,13 @@ export const day2Data: Day2Data = {
           name: "Bugis Street Market",
           icon: "🛍️",
           description: "ストリートマーケット",
-          url: "https://maps.google.com/?q=Maxwell+Food+Centre+Singapore"
+          url: "https://maps.google.com/?q=Bugis+Street+Market+Singapore"
         },
         {
           name: "Bugis Junction",
           icon: "🏬",
           description: "ショッピングモール",
-          url: "https://maps.google.com/?q=Maxwell+Food+Centre+Singapore"
+          url: "https://maps.google.com/?q=Bugis+Junction+Singapore"
         }
       ],
       budget: "$",
@@ -393,7 +393,7 @@ export const day2Data: Day2Data = {
         "軽食",
         "ドリンク"
       ],
-      mapUrl: "https://maps.google.com/?q=Maxwell+Food+Centre+Singapore",
+      mapUrl: "https://maps.google.com/?q=Singapore+Botanic+Gardens",
       tips: [
         "朝早くがおすすめ",
         "歩きやすい靴を",

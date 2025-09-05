@@ -13,6 +13,7 @@ export interface SummerSection {
   tips?: string[];
   ctaText?: string;
   ctaAction?: () => void;
+  mapUrl?: string;
 }
 
 export const summerSections: SummerSection[] = [
@@ -51,7 +52,8 @@ export const summerSections: SummerSection[] = [
     image: "/image/day3-uss.jpg",
     alt: "USSのジェットコースターとアトラクション",
     caption: "USS｜3〜5時間",
-    direction: "right"
+    direction: "right",
+    mapUrl: "https://maps.google.com/?q=Universal+Studios+Singapore"
   },
   {
     id: "text-uss-tips",
@@ -77,7 +79,8 @@ export const summerSections: SummerSection[] = [
     image: "/image/day3-luge.jpg",
     alt: "セントーサ・リュージュのコースと海の景色",
     caption: "リュージュ｜1〜2時間",
-    direction: "left"
+    direction: "left",
+    mapUrl: "https://maps.google.com/?q=Sentosa+Luge+Singapore"
   },
   {
     id: "text-luge-info",
@@ -103,7 +106,8 @@ export const summerSections: SummerSection[] = [
     image: "/image/day3-sea-aquarium.jpg",
     alt: "S.E.A. アクアリウムの大水槽",
     caption: "アクアリウム｜2〜3時間",
-    direction: "left"
+    direction: "left",
+    mapUrl: "https://maps.google.com/?q=S.E.A.+Aquarium+Singapore"
   },
   {
     id: "text-aquarium-info",
@@ -129,7 +133,8 @@ export const summerSections: SummerSection[] = [
     image: "/image/day3-beach.jpg",
     alt: "セントーサ・ビーチの白い砂浜と青い海",
     caption: "ビーチ｜2〜3時間",
-    direction: "right"
+    direction: "right",
+    mapUrl: "https://maps.google.com/?q=Sentosa+Beach+Singapore"
   },
   {
     id: "text-beach-tips",
@@ -153,7 +158,8 @@ export const summerSections: SummerSection[] = [
     image: "/image/day3-wings.jpg",
     alt: "ウィングス・オブ・タイムの光と音のショー",
     caption: "ショー｜1時間",
-    direction: "left"
+    direction: "left",
+    mapUrl: "https://maps.google.com/?q=Wings+of+Time+Sentosa+Singapore"
   },
   {
     id: "text-final",

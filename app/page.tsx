@@ -25,9 +25,9 @@ export default function Page() {
     <div className={`transition-opacity duration-500 ${isPageVisible ? 'opacity-100' : 'opacity-0'}`}>
     <>
       {/* ヒーローセクション */}
-      <section className="min-h-screen relative overflow-hidden">
-        {/* 背景写真 */}
-        <div className="absolute inset-0">
+      <section className="relative overflow-hidden">
+        {/* 背景写真 - アスペクト比を維持 */}
+        <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] md:aspect-[3/1] lg:aspect-[4/1]">
           <Image
             src="/image/day1.jpg"
             alt="シンガポールの美しい景色"
@@ -41,12 +41,12 @@ export default function Page() {
         </div>
         
         {/* コンテンツ */}
-        <div className="relative z-10 flex items-center justify-center min-h-screen text-center text-white">
+        <div className="absolute inset-0 z-10 flex items-center justify-center text-center text-white">
           <div className="max-w-4xl mx-auto px-4">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-2xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 drop-shadow-2xl">
               シンガポール旅行しおり
             </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90 drop-shadow-lg">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 opacity-90 drop-shadow-lg">
               美しい景色、美味しい料理、そして忘れられない体験が待っています
             </p>
           </div>
@@ -54,78 +54,99 @@ export default function Page() {
       </section>
       
       {/* 旅行プランのセクション */}
-      <section className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-purple-100/30 to-pink-100/30" />
-        
-        <div className="relative z-10 container mx-auto px-4 py-20">
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold text-slate-800 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
               シンガポール旅行プラン
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              美しい景色、美味しい料理、そして忘れられない体験が待っています
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              3日間の充実したシンガポール旅行プランをご用意しました。<br />
+              各日の詳細をクリックして、素晴らしい旅の準備を始めましょう。
             </p>
           </div>
-
-          {/* 旅行プランのカード */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                id: 1,
-                day: "Day 1",
-                title: "マリーナベイサンズ",
-                description: "マーライオン公園、ガーデンズ・バイ・ザ・ベイ、The Shoppes、インフィニティプール、イブニングバー、ディナー、カジノ & バー",
-                image: "/image/day1.jpg"
-              },
-              {
-                id: 2,
-                day: "Day 2",
-                title: "シティ周遊 & ナイトサファリ",
-                description: "MBSで朝を満喫、チャイナタウン散策、ホーカーでランチ、リトルインディア、アラブストリート、ブギス、ナイトサファリ",
-                image: "/image/day2.jpg"
-              },
-              {
-                id: 3,
-                day: "Day 3",
-                title: "セントーサ島",
-                description: "USS、スカイライン・リュージュ、SEAアクアリウム、ビーチ散策、ウィングス・オブ・タイム",
-                image: "/image/day3.jpg"
-              }
-            ].map((day) => (
-              <div
-                key={day.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-              >
-                <div className="relative h-48">
-                  <Image
-                    src={day.image}
-                    alt={day.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                    <div className="text-xl font-bold">{day.day}</div>
-                    <h3 className="text-lg font-semibold">{day.title}</h3>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Day 1 */}
+            <Link
+              href="/day/1"
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105"
+            >
+              <div className="relative h-64">
+                <Image
+                  src="/image/day1.jpg"
+                  alt="Day 1 - マリーナベイ・サンズ"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <h3 className="text-2xl font-bold mb-2">Day 1</h3>
+                  <p className="text-lg opacity-90">マリーナベイ・サンズ</p>
+                  <p className="text-sm opacity-75 mt-1">2025年9月27日</p>
+                  <div className="mt-3">
+                    <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur rounded-full text-sm font-medium hover:bg-white/30 transition-colors">
+                      詳細へ →
+                    </span>
                   </div>
                 </div>
-                <div className="p-6">
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                    {day.description}
-                  </p>
-                  <Link
-                    href={`/day/${day.id}`}
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300"
-                  >
-                    詳細を見る
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
+              </div>
+            </Link>
+
+            {/* Day 2 */}
+            <Link
+              href="/day/2"
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105"
+            >
+              <div className="relative h-64">
+                <Image
+                  src="/image/day2.jpg"
+                  alt="Day 2 - 文化体験 & ナイトサファリ"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <h3 className="text-2xl font-bold mb-2">Day 2</h3>
+                  <p className="text-lg opacity-90">文化体験 & ナイトサファリ</p>
+                  <p className="text-sm opacity-75 mt-1">2025年9月28日</p>
+                  <div className="mt-3">
+                    <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur rounded-full text-sm font-medium hover:bg-white/30 transition-colors">
+                      詳細へ →
+                    </span>
+                  </div>
                 </div>
               </div>
-            ))}
+            </Link>
+
+            {/* Day 3 */}
+            <Link
+              href="/day/3"
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105"
+            >
+              <div className="relative h-64">
+                <Image
+                  src="/image/day3.jpg"
+                  alt="Day 3 - セントーサ島"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <h3 className="text-2xl font-bold mb-2">Day 3</h3>
+                  <p className="text-lg opacity-90">セントーサ島</p>
+                  <p className="text-sm opacity-75 mt-1">2025年9月29日</p>
+                  <div className="mt-3">
+                    <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur rounded-full text-sm font-medium hover:bg-white/30 transition-colors">
+                      詳細へ →
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -152,7 +173,7 @@ export default function Page() {
               <Heart className="w-6 h-6" />
             </Link>
             <p className="text-sm text-slate-500 mt-4">
-              💕 カップル向けの特別な機能も充実
+              
             </p>
           </div>
         </div>

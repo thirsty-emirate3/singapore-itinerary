@@ -5,8 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronDownIcon, ChevronUpIcon, ExternalLinkIcon, MapPinIcon, CameraIcon, ArrowRightIcon } from "lucide-react";
 import { DayData, days } from "@/data/days";
-import { day1Photos } from "@/data/day1";
-import DayGallery from "./DayGallery";
 import CasinoGuide from "./CasinoGuide";
 
 interface DayDetailProps {
@@ -194,7 +192,7 @@ export default function DayDetail({ dayData }: DayDetailProps) {
 
   // localStorageからデータを読み込み
   useEffect(() => {
-    const savedMemo = localStorage.getItem(`day${day1Photos}-memo`);
+    const savedMemo = localStorage.getItem(`day${dayData.id}-memo`);
     
     if (savedMemo) {
       setMemo(savedMemo);
@@ -249,8 +247,17 @@ export default function DayDetail({ dayData }: DayDetailProps) {
     return Object.keys(days)[nextIndex];
   };
 
+  // 前の日のIDを取得
+  const getPrevDayId = () => {
+    const currentIndex = Object.keys(days).indexOf(dayData.id);
+    const prevIndex = currentIndex === 0 ? Object.keys(days).length - 1 : currentIndex - 1;
+    return Object.keys(days)[prevIndex];
+  };
+
   const nextDayId = getNextDayId();
+  const prevDayId = getPrevDayId();
   const nextDayData = days[nextDayId];
+  const prevDayData = days[prevDayId];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 text-slate-800">
@@ -326,48 +333,6 @@ export default function DayDetail({ dayData }: DayDetailProps) {
           <p className="text-slate-700 leading-relaxed">{dayData.quick.duration}の旅程</p>
         </div>
 
-        {/* タイムライン */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-semibold mb-6">⏰ タイムライン</h2>
-          <div className="space-y-6">
-            {dayData.timeline.map((slot, index) => (
-              <div key={index} className="flex items-start gap-4">
-                {/* 時間とサムネイル */}
-                <div className="flex flex-col items-center">
-                  <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-2">
-                    {slot.time}
-                  </div>
-                  {timelineImages[slot.time as keyof typeof timelineImages] && (
-                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-200">
-                      <Image
-                        src={timelineImages[slot.time as keyof typeof timelineImages]}
-                        alt={`${slot.title}の写真`}
-                        width={64}
-                        height={64}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-                      />
-                    </div>
-                  )}
-                </div>
-
-                {/* コンテンツ */}
-                <div className="flex-1 bg-gray-50 rounded-xl p-4">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-slate-800">{slot.title}</h3>
-                    <span className="text-2xl">{slot.emoji}</span>
-                  </div>
-                  
-                  {slot.note && (
-                    <p className="text-slate-700 mb-3 leading-relaxed">{slot.note}</p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Timeline and Tickets Section - 2 Column Layout */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -432,6 +397,20 @@ export default function DayDetail({ dayData }: DayDetailProps) {
                           <span>📝</span>
                           {slot.note}
                         </p>
+                      )}
+                      {slot.mapUrl && (
+                        <div className="mt-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(slot.mapUrl, '_blank');
+                            }}
+                            className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full hover:bg-blue-200 transition-colors"
+                          >
+                            <span>🗺️</span>
+                            <span>地図で開く</span>
+                          </button>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -886,26 +865,57 @@ export default function DayDetail({ dayData }: DayDetailProps) {
           />
         </section>
 
-        {/* Photo Gallery Section */}
-        <section className="bg-white/70 backdrop-blur-md rounded-2xl p-6 md:p-8 mb-12 border border-white/20 shadow-lg">
-          <DayGallery photos={day1Photos} />
-        </section>
 
-        {/* Next Day Navigation */}
-        {nextDayData && (
-          <section className="text-center">
-            <Link
-              href={`/day/${nextDayId}`}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-lg"
-            >
-              <span>次の日へ</span>
-              <ArrowRightIcon className="w-5 h-5" />
-            </Link>
-            <p className="text-slate-6 mt-3 font-inter">
-              {nextDayData.title}
-            </p>
-          </section>
-        )}
+        {/* Navigation Section */}
+        <section className="text-center space-y-6">
+          {/* Previous Day Navigation */}
+          {prevDayData && (
+            <div>
+              <Link
+                href={`/day/${prevDayId}`}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-slate-600 text-white rounded-full hover:bg-slate-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-lg"
+              >
+                <ArrowRightIcon className="w-5 h-5 rotate-180" />
+                <span>前の日へ</span>
+              </Link>
+              <p className="text-slate-600 mt-3 font-inter">
+                {prevDayData.title}
+              </p>
+            </div>
+          )}
+
+          {/* Next Day Navigation */}
+          {nextDayData && (
+            <div>
+              <Link
+                href={`/day/${nextDayId}`}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-lg"
+              >
+                <span>次の日へ</span>
+                <ArrowRightIcon className="w-5 h-5" />
+              </Link>
+              <p className="text-slate-600 mt-3 font-inter">
+                {nextDayData.title}
+              </p>
+            </div>
+          )}
+
+          {/* Home Button for Day 3 */}
+          {dayData.id === "3" && (
+            <div>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-green-600 text-white rounded-full hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold text-lg"
+              >
+                <span>🏠</span>
+                <span>ホームに戻る</span>
+              </Link>
+              <p className="text-slate-600 mt-3 font-inter">
+                トップページに戻る
+              </p>
+            </div>
+          )}
+        </section>
       </div>
 
       {/* Mobile Mini FABs */}

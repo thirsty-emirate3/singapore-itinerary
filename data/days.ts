@@ -1,5 +1,5 @@
 export type LinkItem = { label: string; href: string; ext?: boolean }
-export type Slot = { time?: string; title: string; note?: string; emoji?: string }
+export type Slot = { time?: string; title: string; note?: string; emoji?: string; mapUrl?: string }
 export type Dinner = { name: string; area: 'asia'|'western'|'foodcourt'; price: '$'|'$$'|'$$$'; tip?: string; href?: string }
 
 export type DayData = {
@@ -31,16 +31,16 @@ export const days: Record<string, DayData> = {
       best: '夕景〜夜景'
     },
     timeline: [
-      { time: '09:00', emoji: '🧳', title: '荷物をホテルに預ける' },
-      { time: '10:00', emoji: '🦁', title: 'マーライオン公園', note: '写真撮影に最適' },
-      { time: '11:00', emoji: '🌴', title: 'ガーデンズ・バイ・ザ・ベイ', note: 'ドーム/スカイウェイ' },
-      { time: '13:00', emoji: '🍽️', title: 'ランチ（Maxwell などホーカー）' },
-      { time: '15:00', emoji: '🛍️', title: 'The Shoppes でショッピング' },
-      { time: '16:30', emoji: '🏨', title: 'チェックイン' },
-      { time: '17:30', emoji: '🏊', title: 'インフィニティプール' },
-      { time: '19:00', emoji: '🍸', title: 'イブニングバー（SkyPark など）' },
-      { time: '20:00', emoji: '🍴', title: 'ディナー（多国籍レストラン）' },
-      { time: '21:30', emoji: '🎰', title: 'カジノ & バー' },
+      { time: '09:00', emoji: '🧳', title: '荷物をホテルに預ける', mapUrl: 'https://maps.google.com/?q=Marina+Bay+Sands+Singapore' },
+      { time: '10:00', emoji: '🦁', title: 'マーライオン公園', note: '写真撮影に最適', mapUrl: 'https://maps.google.com/?q=Merlion+Park+Singapore' },
+      { time: '11:00', emoji: '🌴', title: 'ガーデンズ・バイ・ザ・ベイ', note: 'ドーム/スカイウェイ', mapUrl: 'https://maps.google.com/?q=Gardens+by+the+Bay+Singapore' },
+      { time: '13:00', emoji: '🍽️', title: 'ランチ（Maxwell などホーカー）', mapUrl: 'https://maps.google.com/?q=Maxwell+Food+Centre+Singapore' },
+      { time: '14:00', emoji: '🛍️', title: 'The Shoppes でショッピング', mapUrl: 'https://maps.google.com/?q=The+Shoppes+at+Marina+Bay+Sands+Singapore' },
+      { time: '15:00', emoji: '🏨', title: 'チェックイン', note: 'マリーナベイサンズ', mapUrl: 'https://maps.google.com/?q=Marina+Bay+Sands+Singapore' },
+      { time: '16:00', emoji: '🏊', title: 'インフィニティプール', mapUrl: 'https://maps.google.com/?q=Marina+Bay+Sands+SkyPark+Singapore' },
+      { time: '18:00', emoji: '🍴', title: 'ディナー（多国籍レストラン）', mapUrl: 'https://maps.google.com/?q=Marina+Bay+Sands+Restaurants+Singapore' },
+      { time: '20:00', emoji: '🍸', title: 'バー（SkyPark など）', note: '夜景を楽しみながら', mapUrl: 'https://maps.google.com/?q=Marina+Bay+Sands+SkyPark+Singapore' },
+      { time: '21:30', emoji: '🎰', title: 'カジノ', mapUrl: 'https://maps.google.com/?q=Marina+Bay+Sands+Casino+Singapore' },
     ],
     tickets: [
       { label: 'MBS 公式', href: 'https://www.marinabaysands.com/', ext: true },
@@ -84,17 +84,17 @@ export const days: Record<string, DayData> = {
       best: '夕方〜夜（サファリ）'
     },
     timeline: [
-      { time: '08:00', emoji: '☕', title: 'ホテルで朝食', note: '軽めの朝食でスタート' },
-      { time: '09:00', emoji: '🚇', title: 'MRTでチャイナタウンへ', note: '地下鉄で移動' },
-      { time: '09:30', emoji: '🏮', title: 'チャイナタウン散策', note: '仏牙寺、マーケット' },
-      { time: '11:00', emoji: '🏛️', title: 'シンガポール国立博物館', note: '歴史と文化を学ぶ' },
-      { time: '13:00', emoji: '🍜', title: 'ランチ（チャイナタウン）', note: '中華料理' },
-      { time: '14:30', emoji: '🛍️', title: 'オーチャード・ロード', note: 'ショッピング' },
-      { time: '16:00', emoji: '🌳', title: 'ボタニック・ガーデン', note: '世界遺産の庭園' },
-      { time: '18:00', emoji: '🍽️', title: 'ディナー（クラーク・キー）', note: 'シーフード' },
-      { time: '19:30', emoji: '🚌', title: 'ナイトサファリへ移動', note: '専用バスで移動' },
-      { time: '20:00', emoji: '🦁', title: 'ナイトサファリ', note: '夜の動物たち' },
-      { time: '22:00', emoji: '🚇', title: 'ホテルに戻る', note: 'MRTで帰宅' },
+      { time: '08:00', emoji: '☕', title: 'ホテルで朝食', note: '軽めの朝食でスタート', mapUrl: 'https://maps.google.com/?q=Marina+Bay+Sands+Singapore' },
+      { time: '09:00', emoji: '🚇', title: 'MRTでチャイナタウンへ', note: '地下鉄で移動', mapUrl: 'https://maps.google.com/?q=Chinatown+MRT+Singapore' },
+      { time: '09:30', emoji: '🏮', title: 'チャイナタウン散策', note: '仏牙寺、マーケット', mapUrl: 'https://maps.google.com/?q=Chinatown+Singapore' },
+      { time: '11:00', emoji: '🏛️', title: 'シンガポール国立博物館', note: '歴史と文化を学ぶ', mapUrl: 'https://maps.google.com/?q=National+Museum+of+Singapore' },
+      { time: '13:00', emoji: '🍜', title: 'ランチ（チャイナタウン）', note: '中華料理', mapUrl: 'https://maps.google.com/?q=Chinatown+Complex+Food+Centre+Singapore' },
+      { time: '14:30', emoji: '🛍️', title: 'オーチャード・ロード', note: 'ショッピング', mapUrl: 'https://maps.google.com/?q=Orchard+Road+Singapore' },
+      { time: '16:00', emoji: '🌳', title: 'ボタニック・ガーデン', note: '世界遺産の庭園', mapUrl: 'https://maps.google.com/?q=Singapore+Botanic+Gardens' },
+      { time: '18:00', emoji: '🍽️', title: 'ディナー（クラーク・キー）', note: 'シーフード', mapUrl: 'https://maps.google.com/?q=Clarke+Quay+Singapore' },
+      { time: '19:30', emoji: '🚌', title: 'ナイトサファリへ移動', note: '専用バスで移動', mapUrl: 'https://maps.google.com/?q=Night+Safari+Singapore' },
+      { time: '20:00', emoji: '🦁', title: 'ナイトサファリ', note: '夜の動物たち', mapUrl: 'https://maps.google.com/?q=Night+Safari+Singapore' },
+      { time: '22:00', emoji: '🚇', title: 'ホテルに戻る', note: 'MRTで帰宅', mapUrl: 'https://maps.google.com/?q=Marina+Bay+Sands+Singapore' },
     ],
     tickets: [
       { label: '国立博物館', href: 'https://www.nationalmuseum.sg/', ext: true },
@@ -136,17 +136,17 @@ export const days: Record<string, DayData> = {
       best: '日中（ビーチ・アトラクション）'
     },
     timeline: [
-      { time: '09:00', emoji: '🚇', title: 'MRTでハーバーフロントへ', note: 'セントーサ行き' },
-      { time: '09:30', emoji: '🚠', title: 'ケーブルカーでセントーサ島へ', note: '絶景を楽しむ' },
-      { time: '10:00', emoji: '🏖️', title: 'シロソ・ビーチ', note: '朝のビーチ散歩' },
-      { time: '11:00', emoji: '🎢', title: 'ユニバーサル・スタジオ', note: 'アトラクション' },
-      { time: '13:00', emoji: '🍔', title: 'ランチ（USJ内）', note: 'テーマパークフード' },
-      { time: '15:00', emoji: '🐘', title: 'マーライオン・セントーサ', note: '巨大マーライオン' },
-      { time: '16:00', emoji: '🌊', title: 'アドベンチャー・コーブ', note: '水上スポーツ' },
-      { time: '17:30', emoji: '🌅', title: '夕日を見る', note: 'ビーチで夕日' },
-      { time: '18:30', emoji: '🍽️', title: 'ディナー（セントーサ内）', note: 'シーフード' },
-      { time: '19:30', emoji: '🎆', title: 'Wings of Time', note: '夜のショー' },
-      { time: '20:30', emoji: '🚠', title: 'ケーブルカーで帰る', note: '夜景を楽しむ' },
+      { time: '09:00', emoji: '🚇', title: 'MRTでハーバーフロントへ', note: 'セントーサ行き', mapUrl: 'https://maps.google.com/?q=HarbourFront+MRT+Singapore' },
+      { time: '09:30', emoji: '🚠', title: 'ケーブルカーでセントーサ島へ', note: '絶景を楽しむ', mapUrl: 'https://maps.google.com/?q=Singapore+Cable+Car+Sky+Network' },
+      { time: '10:00', emoji: '🏖️', title: 'シロソ・ビーチ', note: '朝のビーチ散歩', mapUrl: 'https://maps.google.com/?q=Siloso+Beach+Sentosa+Singapore' },
+      { time: '11:00', emoji: '🎢', title: 'ユニバーサル・スタジオ', note: 'アトラクション', mapUrl: 'https://maps.google.com/?q=Universal+Studios+Singapore' },
+      { time: '13:00', emoji: '🍔', title: 'ランチ（USJ内）', note: 'テーマパークフード', mapUrl: 'https://maps.google.com/?q=Universal+Studios+Singapore+Restaurants' },
+      { time: '15:00', emoji: '🐘', title: 'マーライオン・セントーサ', note: '巨大マーライオン', mapUrl: 'https://maps.google.com/?q=Merlion+Sentosa+Singapore' },
+      { time: '16:00', emoji: '🌊', title: 'アドベンチャー・コーブ', note: '水上スポーツ', mapUrl: 'https://maps.google.com/?q=Adventure+Cove+Waterpark+Sentosa' },
+      { time: '17:30', emoji: '🌅', title: '夕日を見る', note: 'ビーチで夕日', mapUrl: 'https://maps.google.com/?q=Sentosa+Beach+Singapore' },
+      { time: '18:30', emoji: '🍽️', title: 'ディナー（セントーサ内）', note: 'シーフード', mapUrl: 'https://maps.google.com/?q=Sentosa+Island+Restaurants+Singapore' },
+      { time: '19:30', emoji: '🎆', title: 'Wings of Time', note: '夜のショー', mapUrl: 'https://maps.google.com/?q=Wings+of+Time+Sentosa+Singapore' },
+      { time: '20:30', emoji: '🚠', title: 'ケーブルカーで帰る', note: '夜景を楽しむ', mapUrl: 'https://maps.google.com/?q=Singapore+Cable+Car+Sky+Network' },
     ],
     tickets: [
       { label: 'セントーサ島入場', href: 'https://www.sentosa.com/en/', ext: true },

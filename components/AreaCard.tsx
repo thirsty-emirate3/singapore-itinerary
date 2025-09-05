@@ -1,6 +1,7 @@
 "use client";
 
-import { MapPinIcon, UtensilsIcon } from "lucide-react";
+import { useState } from "react";
+import { MapPinIcon, UtensilsIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
 interface Area {
   key: string;
@@ -25,6 +26,8 @@ interface AreaCardProps {
 }
 
 export default function AreaCard({ area }: AreaCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const getThemeColors = (key: string) => {
     switch (key) {
       case 'chinatown':
@@ -132,7 +135,7 @@ export default function AreaCard({ area }: AreaCardProps) {
           </div>
         </div>
 
-        {/* ハイライト */}
+        {/* ハイライト（常に表示） */}
         <div className="mb-4">
           <h4 className="text-sm font-semibold text-slate-700 mb-2">見どころ</h4>
           <ul className="space-y-1">
@@ -145,91 +148,107 @@ export default function AreaCard({ area }: AreaCardProps) {
           </ul>
         </div>
 
-        {/* グルメ */}
-        <div className="mb-4">
-          <h4 className="text-sm font-semibold text-slate-700 mb-2">グルメ</h4>
-          <ul className="space-y-1">
-            {area.food.map((food, index) => (
-              <li key={index} className="text-xs md:text-sm text-slate-600 flex items-start gap-2 leading-snug">
-                <span className="text-orange-500 mt-1">🍜</span>
-                {food}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* 展開/折りたたみボタン */}
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-full flex items-center justify-center gap-2 py-2 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm rounded-lg transition-colors font-medium mb-4"
+        >
+          <span>{isExpanded ? '詳細を閉じる' : '詳細を見る'}</span>
+          {isExpanded ? (
+            <ChevronUpIcon className="w-4 h-4" />
+          ) : (
+            <ChevronDownIcon className="w-4 h-4" />
+          )}
+        </button>
 
-        {/* コツ */}
-        <div className="mb-4">
-          <h4 className="text-sm font-semibold text-slate-700 mb-2">コツ</h4>
-          <ul className="space-y-1">
-            {area.tips.map((tip, index) => (
-              <li key={index} className="text-xs md:text-sm text-slate-600 flex items-start gap-2 leading-snug">
-                <span className="text-green-500 mt-1">💡</span>
-                {tip}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* サブ地点チップ */}
-        {area.subPlaces && area.subPlaces.length > 0 && (
+        {/* 展開可能なコンテンツ */}
+        <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+          {/* グルメ */}
           <div className="mb-4">
-            <h4 className="text-sm font-semibold text-slate-700 mb-2">サブ地点</h4>
-            <div className="flex flex-wrap gap-2">
-              {area.subPlaces.map((place, index) => (
-                <a
-                  key={index}
-                  href={place.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs rounded-lg transition-colors"
-                  aria-label={`${place.name}の詳細を新しいタブで開く`}
-                >
-                  <span>{place.icon}</span>
-                  <span>{place.description}</span>
-                </a>
+            <h4 className="text-sm font-semibold text-slate-700 mb-2">グルメ</h4>
+            <ul className="space-y-1">
+              {area.food.map((food, index) => (
+                <li key={index} className="text-xs md:text-sm text-slate-600 flex items-start gap-2 leading-snug">
+                  <span className="text-orange-500 mt-1">🍜</span>
+                  {food}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-        )}
 
-        {/* 所要時間 */}
-        <div className="mb-4 flex items-center gap-2 text-sm text-slate-600">
-          <span>⌛</span>
-          <span>{area.duration}</span>
-        </div>
+          {/* コツ */}
+          <div className="mb-4">
+            <h4 className="text-sm font-semibold text-slate-700 mb-2">コツ</h4>
+            <ul className="space-y-1">
+              {area.tips.map((tip, index) => (
+                <li key={index} className="text-xs md:text-sm text-slate-600 flex items-start gap-2 leading-snug">
+                  <span className="text-green-500 mt-1">💡</span>
+                  {tip}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        {/* カテゴリ */}
-        <div className="mb-4 flex flex-wrap gap-1">
-          {area.category.map((cat, index) => (
-            <span key={index} className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full">
-              {cat}
-            </span>
-          ))}
-        </div>
+          {/* サブ地点チップ */}
+          {area.subPlaces && area.subPlaces.length > 0 && (
+            <div className="mb-4">
+              <h4 className="text-sm font-semibold text-slate-700 mb-2">サブ地点</h4>
+              <div className="flex flex-wrap gap-2">
+                {area.subPlaces.map((place, index) => (
+                  <a
+                    key={index}
+                    href={place.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs rounded-lg transition-colors"
+                    aria-label={`${place.name}の詳細を新しいタブで開く`}
+                  >
+                    <span>{place.icon}</span>
+                    <span>{place.description}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
 
-        {/* アクションボタン */}
-        <div className="flex gap-2">
-          <a
-            href={area.mapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm rounded-xl hover:bg-indigo-700 transition-colors font-medium"
-            aria-label={`${area.name}の地図を新しいタブで開く`}
-          >
-            <MapPinIcon className="w-4 h-4" />
-            地図
-          </a>
-          <a
-            href={area.mapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 bg-orange-600 text-white text-sm rounded-xl hover:bg-orange-700 transition-colors font-medium"
-            aria-label={`${area.name}の公式/紹介サイトを新しいタブで開く`}
-          >
-            <span>↗</span>
-            公式
-          </a>
+          {/* 所要時間 */}
+          <div className="mb-4 flex items-center gap-2 text-sm text-slate-600">
+            <span>⌛</span>
+            <span>{area.duration}</span>
+          </div>
+
+          {/* カテゴリ */}
+          <div className="mb-4 flex flex-wrap gap-1">
+            {area.category.map((cat, index) => (
+              <span key={index} className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full">
+                {cat}
+              </span>
+            ))}
+          </div>
+
+          {/* アクションボタン */}
+          <div className="flex gap-2">
+            <a
+              href={area.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm rounded-xl hover:bg-indigo-700 transition-colors font-medium"
+              aria-label={`${area.name}の地図を新しいタブで開く`}
+            >
+              <MapPinIcon className="w-4 h-4" />
+              地図
+            </a>
+            <a
+              href={area.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 bg-orange-600 text-white text-sm rounded-xl hover:bg-orange-700 transition-colors font-medium"
+              aria-label={`${area.name}の公式/紹介サイトを新しいタブで開く`}
+            >
+              <span>↗</span>
+              公式
+            </a>
+          </div>
         </div>
       </div>
     </div>
