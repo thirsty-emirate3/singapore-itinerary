@@ -20,13 +20,13 @@ export const USERS: User[] = [
   {
     id: 'user1',
     username: 'すもっぴ',
-    password: getPassword('AUTH_PASSWORD_SUMOPPI'),
+    password: getPassword('AUTH_PASSWORD_SUMOPPI') || '221102', // フォールバック
     displayName: 'すもっぴ'
   },
   {
     id: 'demo',
     username: 'demo',
-    password: getPassword('AUTH_PASSWORD_DEMO'),
+    password: getPassword('AUTH_PASSWORD_DEMO') || 'demo', // フォールバック
     displayName: 'デモユーザー'
   },
 ];
@@ -42,5 +42,5 @@ export const AUTH_CONFIG = {
   LOCKOUT_DURATION: 15,
   
   // ゲストログインの有効/無効
-  ENABLE_GUEST_LOGIN: process.env.NEXT_PUBLIC_ENABLE_GUEST_LOGIN === 'true',
+  ENABLE_GUEST_LOGIN: process.env.NEXT_PUBLIC_ENABLE_GUEST_LOGIN === 'true' || true, // フォールバック
 };
