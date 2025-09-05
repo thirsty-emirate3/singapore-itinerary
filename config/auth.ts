@@ -8,12 +8,8 @@ export interface User {
 
 // 環境変数からパスワードを取得する関数
 const getPassword = (key: string): string => {
-  if (typeof window !== 'undefined') {
-    // クライアントサイドでは環境変数を使用
-    return process.env[`NEXT_PUBLIC_${key}`] || 'default';
-  }
-  // サーバーサイドでは環境変数を使用
-  return process.env[key] || 'default';
+  // クライアントサイドでは NEXT_PUBLIC_ プレフィックスが必要
+  return process.env[`NEXT_PUBLIC_${key}`] || 'default';
 };
 
 export const USERS: User[] = [
