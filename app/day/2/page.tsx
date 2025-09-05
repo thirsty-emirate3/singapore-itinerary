@@ -30,13 +30,13 @@ export default function Day2Page() {
 
   return (
     <div className="min-h-screen text-slate-800 overflow-x-hidden bg-gradient-to-b from-sky-50 to-white">
-      {/* Hero Section - 単一画像で固定比率 */}
-      <section className="relative h-[40vh] md:h-[60vh] overflow-hidden">
+      {/* Hero Section - 適切な高さに調整 */}
+      <section className="relative min-h-[45vh] md:min-h-[50vh] lg:min-h-[60vh] overflow-hidden rounded-2xl mb-8">
         {/* 背景画像 */}
         <div className="absolute inset-0">
           <img
             src="/image/day2_detail/day2-hero.jpg"
-            alt="Day 2の美しい景色"
+            alt="シンガポールの街並み（Day 2 ヒーロー）"
             className="w-full h-full object-cover pointer-events-none"
           />
           {/* グラデーションオーバーレイ（上→下の黒〜透明） */}
