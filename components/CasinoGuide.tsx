@@ -45,12 +45,89 @@ interface Casino {
 }
 
 interface CasinoGuideProps {
-  casino: Casino;
+  casino?: Casino;
 }
 
 export default function CasinoGuide({ casino }: CasinoGuideProps) {
+  // デフォルトのカジノデータ
+  const defaultCasino: Casino = {
+    tabs: ["入場・ルール", "サンズリワーズ", "ゲーム別", "エチケット", "リンク"],
+    games: [
+      {
+        key: "baccarat",
+        name: "バカラ",
+        minBet: "S$20〜",
+        basics: ["プレイヤーかバンカーにベット", "9に近い方が勝ち", "自然8・9は即決"],
+        avoid: ["タイにベット（配当率が低い）"],
+        edge: "目安: バンカー 1.06%",
+        strategy: {
+          core: ["基本はBanker固定（手数料込みでも最小エッジ）", "Tie/ペア系は回避（高配当=高エッジ）"],
+          whenToBet: ["テーブルがNo-Commissionなら、Banker 0勝ち条件を確認してからBanker継続", "連敗でのプログレッシブはしない（資金が飛びやすい）"],
+          avoid: ["トレンド表への過信", "Tie/ペアへの常用"],
+          table: ["Commission有でもOK／No-Com時は例外ルール要確認"],
+          risk: "low" as const
+        }
+      },
+      {
+        key: "blackjack",
+        name: "ブラックジャック",
+        minBet: "S$20〜",
+        basics: ["21に近づける", "Aは1または11", "ディーラーは17以上でスタンド"],
+        avoid: ["インシュランス（配当率が悪い）"],
+        edge: "目安: 基本戦略で 0.5%",
+        strategy: {
+          core: ["基本戦略に忠実（配布表を参照）", "インシュランス禁止（-EV）"],
+          whenToBet: ["11はダブル（ディーラーA除く）", "A,8/A,9はスタンド", "ペア5は分割しない／ペア8は分割"],
+          avoid: ["テーブルルール不明での着席", "連続負けのベット上げ"],
+          table: ["S17/ 6D/ ダブル後ヒット可の台を優先"],
+          risk: "low" as const
+        }
+      },
+      {
+        key: "roulette",
+        name: "ルーレット",
+        minBet: "S$10〜",
+        basics: ["赤・黒、偶数・奇数、1-18・19-36", "0はハウスエッジ", "ヨーロピアンが有利"],
+        avoid: ["単一数字への大額ベット", "5つの数字ベット"],
+        edge: "目安: ヨーロピアン 2.7%",
+        strategy: {
+          core: ["赤・黒、偶数・奇数に限定", "マーチンゲールは避ける"],
+          whenToBet: ["小額から開始", "勝ったら利益を確保"],
+          avoid: ["連続負けでのベット倍増", "感情的なベット"],
+          table: ["ヨーロピアンルーレットを選択"],
+          risk: "mid" as const
+        }
+      }
+    ],
+    links: [
+      { label: "マリーナベイサンズ公式サイト", url: "https://www.marinabaysands.com/" },
+      { label: "カジノルール", url: "https://www.marinabaysands.com/casino.html" },
+      { label: "サンズリワーズ", url: "https://www.marinabaysands.com/sands-rewards.html" }
+    ],
+    notes: {
+      entry: [
+        "21歳以上（パスポート必須）",
+        "スマートカジュアルな服装",
+        "写真撮影禁止",
+        "携帯電話はサイレントモード"
+      ],
+      etiquette: [
+        "ディーラーの指示に従う",
+        "チップは適切に配置",
+        "他のプレイヤーを尊重",
+        "負けても冷静に"
+      ]
+    },
+    bankroll: {
+      defaultStake: 50,
+      min: 20,
+      max: 500
+    }
+  };
+
+  const casinoData = casino || defaultCasino;
   const [activeTab, setActiveTab] = useState(0);
-  const [budget, setBudget] = useState(casino.bankroll.defaultStake * 10);
+  const [budget, setBudget] = useState(casinoData.bankroll.defaultStake * 10);
   const [playTime, setPlayTime] = useState(2);
   const [expandedStrategies, setExpandedStrategies] = useState<Record<string, boolean>>({});
 
@@ -60,7 +137,7 @@ export default function CasinoGuide({ casino }: CasinoGuideProps) {
     const handsPerHour = 60; // 1時間あたりのゲーム数（目安）
     const totalHands = (totalMinutes / 60) * handsPerHour;
     const recommendedBet = Math.round(budget / totalHands);
-    return Math.max(casino.bankroll.min, Math.min(casino.bankroll.max, recommendedBet));
+    return Math.max(casinoData.bankroll.min, Math.min(casinoData.bankroll.max, recommendedBet));
   };
 
   const getGameIcon = (key: string) => {
@@ -101,7 +178,7 @@ export default function CasinoGuide({ casino }: CasinoGuideProps) {
         {/* Mobile: Horizontal Scroll */}
         <div className="md:hidden">
           <div className="flex overflow-x-auto snap-x snap-mandatory gap-2 pb-2">
-            {casino.tabs.map((tab, index) => (
+            {casinoData.tabs.map((tab, index) => (
               <button
                 key={index}
                 onClick={() => setActiveTab(index)}
@@ -119,7 +196,7 @@ export default function CasinoGuide({ casino }: CasinoGuideProps) {
 
         {/* Desktop: Tab Buttons */}
         <div className="hidden md:flex gap-2">
-          {casino.tabs.map((tab, index) => (
+          {casinoData.tabs.map((tab, index) => (
             <button
               key={index}
               onClick={() => setActiveTab(index)}
@@ -142,7 +219,7 @@ export default function CasinoGuide({ casino }: CasinoGuideProps) {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-slate-800 mb-4">入場条件・ルール</h3>
             <div className="grid md:grid-cols-3 gap-4">
-              {casino.notes.entry.map((note, index) => (
+              {casinoData.notes.entry.map((note, index) => (
                 <div key={index} className="flex items-center gap-3 p-3 bg-yellow-50 rounded-xl border border-yellow-200">
                   <span className="text-yellow-600">⚠️</span>
                   <span className="text-sm text-slate-700">{note}</span>
@@ -181,7 +258,7 @@ export default function CasinoGuide({ casino }: CasinoGuideProps) {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-slate-800 mb-4">ゲーム別攻略法</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {casino.games.map((game, index) => (
+              {casinoData.games.map((game, index) => (
                 <div key={index} className="bg-white/70 rounded-xl p-4 border border-white/30 shadow-lg hover:shadow-xl transition-shadow">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
@@ -429,7 +506,7 @@ export default function CasinoGuide({ casino }: CasinoGuideProps) {
                   Do&apos;s
                 </h4>
                 <ul className="space-y-2">
-                  {casino.notes.etiquette.map((note, index) => (
+                  {casinoData.notes.etiquette.map((note, index) => (
                     <li key={index} className="text-sm text-green-700 flex items-start gap-2">
                       <span className="text-green-500 mt-1">•</span>
                       {note}
@@ -467,7 +544,7 @@ export default function CasinoGuide({ casino }: CasinoGuideProps) {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-slate-800 mb-4">公式リンク</h3>
             <div className="space-y-3">
-              {casino.links.map((link, index) => (
+              {casinoData.links.map((link, index) => (
                 <a
                   key={index}
                   href={link.url}
@@ -483,12 +560,12 @@ export default function CasinoGuide({ casino }: CasinoGuideProps) {
             </div>
 
             {/* YouTube Video */}
-            {casino.videoUrl && (
+            {casinoData.videoUrl && (
               <div className="mt-6">
                 <h4 className="font-semibold text-slate-800 mb-3">カジノガイド動画</h4>
                 <div className="relative w-full rounded-xl overflow-hidden" style={{ paddingBottom: '56.25%' }}>
                   <iframe
-                    src={casino.videoUrl}
+                    src={casinoData.videoUrl}
                     title="カジノガイド動画"
                     className="absolute inset-0 w-full h-full"
                     loading="lazy"
@@ -516,16 +593,16 @@ export default function CasinoGuide({ casino }: CasinoGuideProps) {
             </label>
             <input
               type="range"
-              min={casino.bankroll.min * 5}
-              max={casino.bankroll.max * 10}
+              min={casinoData.bankroll.min * 5}
+              max={casinoData.bankroll.max * 10}
               value={budget}
               onChange={(e) => setBudget(Number(e.target.value))}
               className="w-full h-2 bg-indigo-200 rounded-lg appearance-none cursor-pointer"
             />
             <div className="flex justify-between text-xs text-slate-500 mt-1">
-              <span>S${casino.bankroll.min * 5}</span>
+              <span>S${casinoData.bankroll.min * 5}</span>
               <span>S${budget}</span>
-              <span>S${casino.bankroll.max * 10}</span>
+              <span>S${casinoData.bankroll.max * 10}</span>
             </div>
           </div>
           
