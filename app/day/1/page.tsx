@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRightIcon, ExternalLinkIcon, MapPinIcon, ChevronDownIcon, ChevronUpIcon, CameraIcon, StarIcon } from "lucide-react";
+import { ArrowRightIcon, MapPinIcon } from "lucide-react";
 import { days } from "@/data/days";
 import CasinoGuide from "@/components/CasinoGuide";
 
@@ -23,12 +23,6 @@ export default function Day1Page() {
     });
   };
 
-  const toggleSection = (section: string) => {
-    setExpandedSections(prev => ({
-      ...prev,
-      [section]: !prev[section]
-    }));
-  };
 
   const getPrevDayId = () => {
     return null;
@@ -293,7 +287,7 @@ export default function Day1Page() {
       description: 'エレガントなロビー'
     }
   ];
-
+  
   if (!dayData) {
     return <div>データが見つかりません</div>;
   }
@@ -526,7 +520,7 @@ export default function Day1Page() {
                       >
                         地図
                       </button>
-                      {restaurant.reserveUrl && (
+                      {'reserveUrl' in restaurant && restaurant.reserveUrl && (
                         <button
                           onClick={() => window.open(restaurant.reserveUrl, '_blank')}
                           className="flex-1 px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full hover:bg-green-200 transition-colors"
@@ -633,7 +627,7 @@ export default function Day1Page() {
                       >
                         地図
                       </button>
-                      {bar.reserveUrl && (
+                      {'reserveUrl' in bar && bar.reserveUrl && (
                         <button
                           onClick={() => window.open(bar.reserveUrl, '_blank')}
                           className="flex-1 px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full hover:bg-green-200 transition-colors"
