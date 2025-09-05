@@ -1,4 +1,4 @@
-// 本番環境用の認証設定
+// 認証設定（本番用）
 export interface User {
   id: string;
   username: string;
@@ -6,37 +6,35 @@ export interface User {
   displayName: string;
 }
 
-// 環境変数からパスワードを取得する関数
-const getPassword = (key: string): string => {
-  // クライアントサイドでは NEXT_PUBLIC_ プレフィックスが必要
-  return process.env[`NEXT_PUBLIC_${key}`] || 'default';
-};
+// ローカル設定を読み込む（存在しない場合はデフォルト値を使用）
+let localConfig: any = null;
 
-export const USERS: User[] = [
+try {
+  // ローカル設定ファイルを動的にインポート
+  localConfig = require('./auth.local.ts');
+} catch (error) {
+  // ローカル設定ファイルが存在しない場合はデフォルト値を使用
+  console.log('ローカル認証設定が見つかりません。デフォルト値を使用します。');
+}
+
+export const USERS: User[] = localConfig?.USERS || [
   {
     id: 'user1',
     username: 'すもっぴ',
-    password: getPassword('AUTH_PASSWORD_SUMOPPI') || '221102', // フォールバック
+    password: '221102', // デフォルト値
     displayName: 'すもっぴ'
   },
   {
     id: 'demo',
     username: 'demo',
-    password: getPassword('AUTH_PASSWORD_DEMO') || 'demo', // フォールバック
+    password: 'demo', // デフォルト値
     displayName: 'デモユーザー'
   },
 ];
 
-export const AUTH_CONFIG = {
-  // セッション有効期限（時間）
+export const AUTH_CONFIG = localConfig?.AUTH_CONFIG || {
   SESSION_DURATION: 24,
-  
-  // 最大試行回数
   MAX_ATTEMPTS: 5,
-  
-  // ロックアウト時間（分）
   LOCKOUT_DURATION: 15,
-  
-  // ゲストログインの有効/無効
-  ENABLE_GUEST_LOGIN: process.env.NEXT_PUBLIC_ENABLE_GUEST_LOGIN === 'true' || true, // フォールバック
+  ENABLE_GUEST_LOGIN: true,
 };

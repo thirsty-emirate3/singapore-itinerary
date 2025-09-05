@@ -35,7 +35,7 @@ yarn-error.log*
 !.env.example
 
 # 認証設定ファイル（セキュリティのため）
-# config/auth.ts は本番用に変更したため、gitignoreから削除
+config/auth.local.ts
 
 # vercel
 .vercel
