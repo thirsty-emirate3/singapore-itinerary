@@ -1,20 +1,6 @@
-import { notFound } from "next/navigation";
-import { days } from "@/data/days";
-import DayDetail from "@/components/DayDetail";
-
-// 静的生成のためのパラメータ
-export async function generateStaticParams() {
-  return Object.keys(days).map((id) => ({
-    id: id,
-  }));
-}
+import { redirect } from "next/navigation";
 
 export default function DayPage({ params }: { params: { id: string } }) {
-  const dayData = days[params.id];
-  
-  if (!dayData) {
-    notFound();
-  }
-
-  return <DayDetail dayData={dayData} />;
+  // 各日専用のページにリダイレクト
+  redirect(`/day/${params.id}`);
 }
