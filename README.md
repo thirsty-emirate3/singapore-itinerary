@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Singapore Itinerary
 
-## Getting Started
+シンガポール旅行の詳細なプランナーアプリです。
 
-First, run the development server:
+## 機能
+
+- 4日間の詳細な旅行プラン
+- 各日のスポット情報とタイムライン
+- 写真ギャラリーとメモ機能
+- マルチユーザー認証システム
+- ゲストログイン機能
+- レスポンシブデザイン
+- PWA対応
+
+## 技術スタック
+
+- Next.js 15
+- React 18
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- IndexedDB
+
+## セットアップ
+
+### 1. リポジトリのクローン
+
+```bash
+git clone <repository-url>
+cd singapore-itinerary
+```
+
+### 2. 依存関係のインストール
+
+```bash
+npm install
+```
+
+### 3. 環境変数の設定
+
+`.env.local`ファイルを作成し、以下の内容を設定してください：
+
+```env
+# 認証設定
+NEXT_PUBLIC_ENABLE_GUEST_LOGIN=true
+AUTH_PASSWORD_SUMOPPI=your_password_here
+AUTH_PASSWORD_DEMO=your_demo_password_here
+```
+
+### 4. 認証設定ファイルの作成
+
+`config/auth.ts`ファイルを作成し、`config/auth.example.ts`を参考に設定してください。
+
+## 開発
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ビルド
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## デプロイ
 
-## Learn More
+### Vercel
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx vercel --prod
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### その他のプラットフォーム
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+# outフォルダをホスティングサービスにアップロード
+```
 
-## Deploy on Vercel
+## セキュリティ
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- パスワードは環境変数で管理
+- 各ユーザーのデータは完全に分離
+- ゲストユーザーは写真のアップロード不可
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ライセンス
+
+MIT License

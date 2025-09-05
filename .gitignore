@@ -32,6 +32,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# 認証設定ファイル（セキュリティのため）
+# config/auth.ts は本番用に変更したため、gitignoreから削除
 
 # vercel
 .vercel
