@@ -77,19 +77,19 @@ export default function Day3Page() {
           </div>
         </section>
 
-        {/* メインコンテンツ */}
+      {/* メインコンテンツ */}
         <div className="py-8 md:py-12">
         {summerSections.map((section) => (
           <div key={section.id}>
-            <TextCard
-              id={section.id}
-              title={section.title}
-              description={section.description}
-              icon={section.icon}
-              tips={section.tips}
-              ctaText={section.ctaText}
-              ctaAction={section.ctaAction}
-            />
+              <TextCard
+                id={section.id}
+                title={section.title}
+                description={section.description}
+                icon={section.icon}
+                tips={section.tips}
+                ctaText={section.ctaText}
+                ctaAction={section.ctaAction}
+              />
             
             {/* セクション間の画像挿入 */}
             {section.id === "text-theme" && (
