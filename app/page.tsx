@@ -84,7 +84,7 @@ export default function Page() {
                 <div className="absolute bottom-4 left-4 right-4 text-white">
                   <h3 className="text-2xl font-bold mb-2">Day 1</h3>
                   <p className="text-lg opacity-90">マリーナベイ・サンズ</p>
-                  <p className="text-sm opacity-75 mt-1">2025年9月27日</p>
+                  <p className="text-sm opacity-75 mt-1">2025年9月26日</p>
                   <div className="mt-3">
                     <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur rounded-full text-sm font-medium hover:bg-white/30 transition-colors">
                       詳細へ →
@@ -111,7 +111,7 @@ export default function Page() {
                 <div className="absolute bottom-4 left-4 right-4 text-white">
                   <h3 className="text-2xl font-bold mb-2">Day 2</h3>
                   <p className="text-lg opacity-90">文化体験 & ナイトサファリ</p>
-                  <p className="text-sm opacity-75 mt-1">2025年9月28日</p>
+                  <p className="text-sm opacity-75 mt-1">2025年9月27日</p>
                   <div className="mt-3">
                     <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur rounded-full text-sm font-medium hover:bg-white/30 transition-colors">
                       詳細へ →
@@ -138,7 +138,7 @@ export default function Page() {
                 <div className="absolute bottom-4 left-4 right-4 text-white">
                   <h3 className="text-2xl font-bold mb-2">Day 3</h3>
                   <p className="text-lg opacity-90">セントーサ島</p>
-                  <p className="text-sm opacity-75 mt-1">2025年9月29日</p>
+                  <p className="text-sm opacity-75 mt-1">2025年9月28日</p>
                   <div className="mt-3">
                     <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur rounded-full text-sm font-medium hover:bg-white/30 transition-colors">
                       詳細へ →

@@ -20,7 +20,7 @@ export type DayData = {
 export const days: Record<string, DayData> = {
   '1': {
     id: '1',
-    date: '2025-09-27',
+    date: '2025-09-26',
     title: 'Day1 — マリーナベイ・サンズ',
     hero: '/image/day1.jpg',
     quick: {
@@ -73,7 +73,7 @@ export const days: Record<string, DayData> = {
   },
   '2': {
     id: '2',
-    date: '2025-09-28',
+    date: '2025-09-27',
     title: 'Day2 — シティ周遊 & ナイトサファリ',
     hero: '/image/day2.jpg',
     quick: {
@@ -125,7 +125,7 @@ export const days: Record<string, DayData> = {
   },
   '3': {
     id: '3',
-    date: '2025-09-29',
+    date: '2025-09-28',
     title: 'Day3 — セントーサ島',
     hero: '/image/day3.jpg',
     quick: {
